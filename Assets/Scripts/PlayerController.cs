@@ -2,12 +2,11 @@
 
 public class PlayerController : ActorController
 {
-    public const float InteractionRange = 1.5f;
     new Camera camera;
+    protected const int MoveForce = 300;
 
     float currentExtraGravity;
     float incrementExtraGravity = 300;
-
 
     void Awake()
     {
@@ -47,7 +46,7 @@ public class PlayerController : ActorController
 
         if (moveForce.magnitude > 1f)
         {
-            mesh.transform.forward = Vector3.Lerp(mesh.transform.forward, moveForce, 1 * Time.deltaTime);
+            FaceDirection(moveForce);
         }
     }
 

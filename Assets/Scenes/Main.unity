@@ -146,6 +146,7 @@ MonoBehaviour:
   pickupablePrefabs:
   - {fileID: 3183844297149147331, guid: 6bf618f44c3032b40bc0def02b17a4ad, type: 3}
   - {fileID: 3183844297149147331, guid: 36fd19899be886243bc10d84f41247ce, type: 3}
+  ghost: {fileID: 6034593692678641037}
 --- !u!4 &90885584
 Transform:
   m_ObjectHideFlags: 0
@@ -1454,6 +1455,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11b0fb8bb25cd9544aeffc96176fb4ce, type: 3}
+--- !u!114 &6034593692678641037 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3409636195272802573, guid: 11b0fb8bb25cd9544aeffc96176fb4ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 4486903118575761724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d631d01fc07a414ea801837bc637a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7451334451377545400
 PrefabInstance:
   m_ObjectHideFlags: 0

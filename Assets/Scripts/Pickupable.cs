@@ -14,7 +14,7 @@ public class Pickupable : Interactable
     {
         actor.DropPickupable();
         rigidbody.isKinematic = true;
-        actor.CurrentPickupable = this;
+        actor.PickUp(this);
     }
 
     public void OnDrop(Vector3 force)
