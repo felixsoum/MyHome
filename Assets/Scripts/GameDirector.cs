@@ -6,7 +6,7 @@ public class GameDirector : MonoBehaviour
 {
     [SerializeField] PlayerController player = null;
     [SerializeField] GameObject arrow = null;
-    [SerializeField] GameObject pickupableCubePrefab = null;
+    [SerializeField] List<GameObject> pickupablePrefabs = new List<GameObject>();
 
     public List<Interactable> Interactables { get; set; } = new List<Interactable>();
 
@@ -56,7 +56,8 @@ public class GameDirector : MonoBehaviour
 
     void SpawnCube()
     {
-        Vector3 randomPOs = new Vector3(Random.Range(-10, 10), 10, Random.Range(-10, 10));
-        Instantiate(pickupableCubePrefab, randomPOs, Quaternion.identity);
+        Vector3 randomPos = new Vector3(Random.Range(-10, 10), 10, Random.Range(-10, 10));
+        var randomPrefab = pickupablePrefabs[Random.Range(0, pickupablePrefabs.Count)];
+        Instantiate(randomPrefab, randomPos, Quaternion.identity);
     }
 }

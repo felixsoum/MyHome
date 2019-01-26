@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
         if (CurrentPickupable != null)
         {
             CurrentPickupable.transform.position = pickupTransform.position;
+            CurrentPickupable.transform.rotation = mesh.transform.rotation;
         }
     }
 
