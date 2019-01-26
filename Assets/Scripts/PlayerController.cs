@@ -6,6 +6,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject mesh = null;
     public const float InteractionRange = 1.5f;
     private const float ThrowForce = 1000;
+    private const int MoveForce = 200;
+    private const int JumpForce = 50;
+
+    float currentExtraGravity;
+    float incrementExtraGravity = 200;
 
     public Pickupable CurrentPickupable { get; set; }
     new Rigidbody rigidbody;
@@ -37,7 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             moveForce.Normalize();
         }
-        moveForce *= 200;
+        moveForce *= MoveForce;
         rigidbody.AddForce(moveForce * Time.deltaTime, ForceMode.VelocityChange);
 
         if (moveForce.magnitude > 0.01f)
@@ -50,10 +55,30 @@ public class PlayerController : MonoBehaviour
             CurrentPickupable.transform.position = pickupTransform.position;
             CurrentPickupable.transform.rotation = mesh.transform.rotation;
         }
+
+        if (IsGrounded())
+        {
+            currentExtraGravity = 0;
+            if (Input.GetButtonDown("Jump"))
+            {
+                rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
+            }
+        }
+        else
+        {
+            currentExtraGravity += incrementExtraGravity * Time.deltaTime;
+        }
+
+        rigidbody.AddForce(Vector3.down * currentExtraGravity);
     }
 
     internal void Interact(Interactable interactable)
     {
         interactable.Interact(this);
+    }
+
+    bool IsGrounded()
+    {
+        return Physics.BoxCast(transform.position + Vector3.up * 1, new Vector3(0.5f, 0.05f, 0.5f), Vector3.down, Quaternion.identity, 1);
     }
 }
