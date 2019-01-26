@@ -6,8 +6,14 @@ public class GameDirector : MonoBehaviour
 {
     [SerializeField] PlayerController player = null;
     [SerializeField] GameObject arrow = null;
+    [SerializeField] GameObject pickupableCubePrefab = null;
 
     public List<Interactable> Interactables { get; set; } = new List<Interactable>();
+
+    void Awake()
+    {
+        InvokeRepeating("SpawnCube", 5, 5);
+    }
 
     void Update()
     {
@@ -37,10 +43,20 @@ public class GameDirector : MonoBehaviour
 
         if (Input.GetButtonDown("Interact"))
         {
-            if (closestInteractable != null)
+            if (player.CurrentPickupable != null)
+            {
+                player.DropPickupable();
+            }
+            else if (closestInteractable != null)
             {
                 player.Interact(closestInteractable);
             }
         }
+    }
+
+    void SpawnCube()
+    {
+        Vector3 randomPOs = new Vector3(Random.Range(-10, 10), 10, Random.Range(-10, 10));
+        Instantiate(pickupableCubePrefab, randomPOs, Quaternion.identity);
     }
 }

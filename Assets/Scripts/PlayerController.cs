@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Transform pickupTransform;
-    [SerializeField] GameObject mesh;
+    [SerializeField] Transform pickupTransform = null;
+    [SerializeField] GameObject mesh = null;
     public const float InteractionRange = 1.5f;
+    private const float ThrowForce = 1000;
+
     public Pickupable CurrentPickupable { get; set; }
     new Rigidbody rigidbody;
     new Camera camera;
@@ -20,7 +19,8 @@ public class PlayerController : MonoBehaviour
 
     internal void DropPickupable()
     {
-        CurrentPickupable?.OnDrop();
+        CurrentPickupable?.OnDrop(mesh.transform.forward * ThrowForce);
+        CurrentPickupable = null;
     }
 
     void Update()

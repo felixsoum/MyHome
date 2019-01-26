@@ -19,8 +19,9 @@ public class Pickupable : Interactable
         playerController.CurrentPickupable = this;
     }
 
-    public void OnDrop()
+    public void OnDrop(Vector3 force)
     {
         rigidbody.isKinematic = false;
+        rigidbody.AddForce(force);
     }
 }
