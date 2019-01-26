@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         moveForce *= MoveForce;
         rigidbody.AddForce(moveForce * Time.deltaTime, ForceMode.VelocityChange);
 
-        if (moveForce.magnitude > 0.01f)
+        if (moveForce.magnitude > 0.1f)
         {
             mesh.transform.forward = Vector3.Lerp(mesh.transform.forward, moveForce, 1 * Time.deltaTime);
         }
