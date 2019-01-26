@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     new Rigidbody rigidbody;
-    Camera camera;
+    new Camera camera;
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
