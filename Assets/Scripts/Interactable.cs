@@ -1,17 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
     GameDirector gameDirector;
 
 
-    void Awake()
+    protected virtual void Awake()
     {
         gameDirector = GameObject.FindGameObjectWithTag("GameDirector").GetComponent<GameDirector>();
         gameDirector.Interactables.Add(this);
     }
 
+    internal virtual void Interact(PlayerController playerController)
+    {
 
+    }
 }
