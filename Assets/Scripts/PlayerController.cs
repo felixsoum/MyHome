@@ -5,12 +5,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform pickupTransform = null;
     [SerializeField] GameObject mesh = null;
     public const float InteractionRange = 1.5f;
-    private const float ThrowForce = 1000;
+    private const float ThrowForce = 10000;
     private const int MoveForce = 200;
     private const int JumpForce = 50;
 
     float currentExtraGravity;
-    float incrementExtraGravity = 200;
+    float incrementExtraGravity = 300;
 
     public Pickupable CurrentPickupable { get; set; }
     new Rigidbody rigidbody;
@@ -79,6 +79,6 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.BoxCast(transform.position + Vector3.up * 1, new Vector3(0.5f, 0.05f, 0.5f), Vector3.down, Quaternion.identity, 1);
+        return Physics.BoxCast(transform.position + Vector3.up * 1, new Vector3(0.4f, 0.05f, 0.4f), Vector3.down, Quaternion.identity, 1);
     }
 }
