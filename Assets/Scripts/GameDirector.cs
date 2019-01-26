@@ -33,7 +33,7 @@ public class GameDirector : MonoBehaviour
         if (bestDistance <= PlayerController.InteractionRange)
         {
             arrow.gameObject.SetActive(true);
-            arrow.transform.position = closestInteractable.transform.position + Vector3.up;
+            arrow.transform.position = closestInteractable.transform.position + Vector3.up * 2;
         }
         else
         {

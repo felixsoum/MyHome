@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject mesh = null;
     public const float InteractionRange = 1.5f;
     private const float ThrowForce = 10000;
-    private const int MoveForce = 200;
+    private const int MoveForce = 300;
     private const int JumpForce = 50;
 
     float currentExtraGravity;
@@ -30,6 +30,24 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        UpdateMovement();
+
+        if (CurrentPickupable != null)
+        {
+            CurrentPickupable.transform.position = pickupTransform.position;
+            CurrentPickupable.transform.rotation = mesh.transform.rotation;
+        }
+
+        UpdateJump();
+
+        if (transform.position.y < -1)
+        {
+            transform.position = new Vector3(0, 2, 0);
+        }
+    }
+
+    private void UpdateMovement()
+    {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 forward = camera.transform.forward;
@@ -49,13 +67,10 @@ public class PlayerController : MonoBehaviour
         {
             mesh.transform.forward = Vector3.Lerp(mesh.transform.forward, moveForce, 1 * Time.deltaTime);
         }
+    }
 
-        if (CurrentPickupable != null)
-        {
-            CurrentPickupable.transform.position = pickupTransform.position;
-            CurrentPickupable.transform.rotation = mesh.transform.rotation;
-        }
-
+    private void UpdateJump()
+    {
         if (IsGrounded())
         {
             currentExtraGravity = 0;
