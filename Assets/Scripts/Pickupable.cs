@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pickupable : Interactable
 {
@@ -12,11 +10,11 @@ public class Pickupable : Interactable
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    internal override void Interact(PlayerController playerController)
+    internal override void Interact(ActorController actor)
     {
-        playerController.DropPickupable();
+        actor.DropPickupable();
         rigidbody.isKinematic = true;
-        playerController.CurrentPickupable = this;
+        actor.CurrentPickupable = this;
     }
 
     public void OnDrop(Vector3 force)

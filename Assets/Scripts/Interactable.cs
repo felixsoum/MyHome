@@ -11,7 +11,7 @@ public class Interactable : MonoBehaviour
         gameDirector.Interactables.Add(this);
     }
 
-    internal virtual void Interact(PlayerController playerController)
+    internal virtual void Interact(ActorController actor)
     {
 
     }

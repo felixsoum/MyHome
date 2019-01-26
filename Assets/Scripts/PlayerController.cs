@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : ActorController
 {
-    [SerializeField] Transform pickupTransform = null;
-    [SerializeField] GameObject mesh = null;
     public const float InteractionRange = 1.5f;
-    private const float ThrowForce = 10000;
-    private const int MoveForce = 300;
-    private const int JumpForce = 50;
+    new Camera camera;
 
     float currentExtraGravity;
     float incrementExtraGravity = 300;
 
-    public Pickupable CurrentPickupable { get; set; }
-    new Rigidbody rigidbody;
-    new Camera camera;
 
     void Awake()
     {
@@ -22,21 +15,10 @@ public class PlayerController : MonoBehaviour
         camera = Camera.main;
     }
 
-    internal void DropPickupable()
+    protected override void Update()
     {
-        CurrentPickupable?.OnDrop(mesh.transform.forward * ThrowForce);
-        CurrentPickupable = null;
-    }
-
-    void Update()
-    {
+        base.Update();
         UpdateMovement();
-
-        if (CurrentPickupable != null)
-        {
-            CurrentPickupable.transform.position = pickupTransform.position;
-            CurrentPickupable.transform.rotation = mesh.transform.rotation;
-        }
 
         UpdateJump();
 
@@ -63,7 +45,7 @@ public class PlayerController : MonoBehaviour
         moveForce *= MoveForce;
         rigidbody.AddForce(moveForce * Time.deltaTime, ForceMode.VelocityChange);
 
-        if (moveForce.magnitude > 0.1f)
+        if (moveForce.magnitude > 1f)
         {
             mesh.transform.forward = Vector3.Lerp(mesh.transform.forward, moveForce, 1 * Time.deltaTime);
         }
@@ -87,13 +69,10 @@ public class PlayerController : MonoBehaviour
         rigidbody.AddForce(Vector3.down * currentExtraGravity);
     }
 
-    internal void Interact(Interactable interactable)
-    {
-        interactable.Interact(this);
-    }
-
     bool IsGrounded()
     {
         return Physics.BoxCast(transform.position + Vector3.up * 1, new Vector3(0.4f, 0.05f, 0.4f), Vector3.down, Quaternion.identity, 1);
     }
+
+
 }

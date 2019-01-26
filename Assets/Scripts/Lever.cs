@@ -21,7 +21,7 @@ public class Lever : Interactable
         handleOrigin.transform.localRotation = Quaternion.Lerp(handleOrigin.transform.localRotation, targetRot, HandleSpeed * Time.deltaTime);
     }
 
-    internal override void Interact(PlayerController playerController)
+    internal override void Interact(ActorController actor)
     {
         isOn = !isOn;
         float angle = 30f;
